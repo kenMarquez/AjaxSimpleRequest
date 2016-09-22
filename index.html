@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="demo">
+    <h2>Aquí se cambía el texto cuando utilizas AJAX2</h2>
+</div>
+
+<button type="button" onclick="Update()">Change Content</button>
+
+
+<a href="" id="a"  hidden>click here to download your file</a>
+
+
+<script type="text/javascript">
+
+    function Update() {
+
+        var xhttp = new XMLHttpRequest();
+
+        xhttp.onreadystatechange = function () {
+
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("demo").innerHTML = this.responseText;
+
+                var blob = new Blob([this.response], {type: 'application/vnd.ms-excel'});
+                var downloadUrl = URL.createObjectURL(blob);
+                var a = document.createElement("a");
+                a.href = downloadUrl;
+                a.download = "data.xls";
+                document.body.appendChild(a);
+                a.click();
+            }
+        };
+        eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjU3NjQxYmEwOTRiYjI5Y2UxOTI5MmE3YiIsImlhdCI6MTQ3NDU2MTQ2NCwiZXhwIjoxNDc3MTUzNDY0fQ.IJlGsUB9thc71_f6C5r15QG4_4asd-CrYUg7vp0n6EU
+        xhttp.open("GET", "http://23.102.160.137/api/polls/57e16580ed26d740f0ea6d77/getcsv/1", true);
+        xhttp.setRequestHeader('Authorization', "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjU3NjQxYmEwOTRiYjI5Y2UxOTI5MmE3YiIsImlhdCI6MTQ3NDU2MTMxMSwiZXhwIjoxNDc3MTUzMzExfQ.HMKgQ5uud9PdGpQLY-91G8QHRryfQarqHxon5kAUETc")
+        xhttp.setRequestHeader('Content-Type', "application/text")
+        xhttp.send();
+    }
+</script>
+
+</body>
+
+</html>
